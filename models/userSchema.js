@@ -11,10 +11,6 @@ const userSchema = new Schema({
         type : String,
         required : true , 
         unique : true
-    },
-    login:{
-        type: Boolean,
-        default: false
     }
 })
 

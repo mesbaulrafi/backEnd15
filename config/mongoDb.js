@@ -1,17 +1,12 @@
-// require('node:dns').setServers(['1.1.1.1','8.8.8.8'])
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const mongoDb = require('./config/mongoDb')
-const authRoute = require('./routes/authRoute')
-const app = express()
+const mongoose = require('mongoose');
 
-mongoDb()
 
-app.use(express.json())
+const mongoDb = ()=>{
+    return mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.e8wo0rw.mongodb.net/${process.env.MONGODB_DBNAME}?appName=Cluster0`)
+    .then(() => console.log('Database Connected successfully'))
+    .catch(err =>{
+        console.log(err);
+    })
+}
 
-app.use('/api/v1/auth', authRoute)
-
-app.listen(5000,()=>{
-    console.log("Server is running")
-})
+module.exports = mongoDb
